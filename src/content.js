@@ -292,13 +292,6 @@ function ensureModalShell() {
         if (!(event.target instanceof Element)) return;
 
 
-        const themeToggle = event.target.closest("[data-ksb-toggle-theme]");
-        if (themeToggle instanceof HTMLElement) {
-            await ksbToggleDarkMode();
-            renderTimetable();
-            return;
-        }
-
         const swapButton = event.target.closest("[data-ksb-swap-from]");
         if (swapButton instanceof HTMLElement) {
             const fromId = swapButton.dataset.ksbSwapFrom;
@@ -1410,8 +1403,8 @@ function renderTimetableSubjectBlock(subject, conflictingSubjectIds = new Set(),
     
     const style = `
         grid-column: ${placement.columnStart} / span ${placement.columnSpan};
-        --ksb-block-bg: ${ksbGetCurrentTheme() === 'dark' ? catStyle.darkBg : catStyle.bg};
-        --ksb-block-border: ${ksbGetCurrentTheme() === 'dark' ? catStyle.darkBorder : catStyle.border};
+        --ksb-block-bg: ${catStyle.bg};
+        --ksb-block-border: ${catStyle.border};
         background: var(--ksb-block-bg);
         border-color: var(--ksb-block-border);
         border-left-color: var(--ksb-block-border);

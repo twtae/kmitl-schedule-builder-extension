@@ -16,18 +16,6 @@
     --ksb-font: 'Sarabun', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-.ksb-theme-dark {
-    --ksb-bg-panel: #1e1e1e;
-    --ksb-bg-body: #121212;
-    --ksb-text-main: #e0e0e0;
-    --ksb-text-muted: #aaaaaa;
-    --ksb-border: #333333;
-    --ksb-shadow: rgba(0, 0, 0, 0.6);
-    --ksb-primary-light: #2c1a14;
-    --ksb-conflict-bg: #2d1a1a;
-    --ksb-conflict-border: #991b1b;
-}
-
 #kmitl-schedule-builder-launcher {
     --ksb-launcher-left: 12px;
     --ksb-launcher-width: 260px;
