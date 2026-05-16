@@ -44,7 +44,7 @@ There are two ways to install the extension locally.
 ### Option 1: Download from the release page
 
 1. Go to the [Releases page](https://github.com/twtae/kmitl-schedule-builder-extension/releases).
-2. Download the latest release ZIP, for example `kmitl-schedule-builder-extension-v0.2.0.zip`.
+2. Download the latest release ZIP, for example `kmitl-schedule-builder-extension-v0.3.0.zip`.
 3. Extract the ZIP file.
 4. Open Google Chrome and navigate to `chrome://extensions`.
 5. Enable "Developer mode" using the toggle in the top-right corner.

@@ -7,9 +7,9 @@
  */
 
 const KSB_CATEGORY_PALETTE = {
-    "gen-ed":  { label: "Gen-Ed", color: "#0d9488", bg: "#ccfbf1", border: "#0d9488", darkBg: "#042f2e", darkBorder: "#14b8a6" },
-    "major":   { label: "Major",  color: "#f15a24", bg: "#fff3ed", border: "#f15a24", darkBg: "#431407", darkBorder: "#fb923c" },
-    "unknown": { label: "Other",  color: "#6b7280", bg: "#f3f4f6", border: "#9ca3af", darkBg: "#1f2937", darkBorder: "#6b7280" },
+    "gen-ed":  { label: "Gen-Ed", color: "#0d9488", bg: "#ccfbf1", border: "#0d9488" },
+    "major":   { label: "Major",  color: "#f15a24", bg: "#fff3ed", border: "#f15a24" },
+    "unknown": { label: "Other",  color: "#6b7280", bg: "#f3f4f6", border: "#9ca3af" },
 };
 
 let ksbCategoryOverrides = {};

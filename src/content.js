@@ -50,9 +50,13 @@ async function init() {
 }
 
 function isTeachTablePage() {
-    const isKmitlRegis = window.location.hostname.includes("reg.kmitl.ac.th");
-    const isTeachTable = window.location.hash.includes("teach_table");
-    return isKmitlRegis && isTeachTable;
+    const hashRoute = window.location.hash.slice(1);
+    const isTeachTableRoute =
+        hashRoute === "/teach_table" ||
+        hashRoute.startsWith("/teach_table?") ||
+        hashRoute.startsWith("/teach_table/");
+
+    return window.location.origin === "https://regis.reg.kmitl.ac.th" && isTeachTableRoute;
 }
 
 function handleRouteChange() {
@@ -255,7 +259,13 @@ function ensureModalShell() {
         <div class="ksb-export-actions">
             <button class="ksb-export-button" type="button" data-ksb-action="copy-reg-codes" title="Copy codes for registration page">${ksbRenderIcon("register")} Copy codes</button>
             <div class="ksb-dropdown">
-                <button class="ksb-export-button ksb-dropdown-toggle" type="button">
+                <button
+                    class="ksb-export-button ksb-dropdown-toggle"
+                    type="button"
+                    data-ksb-toggle-dropdown="share"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                >
                     ${ksbRenderIcon("share")} Share ${ksbRenderIcon("chevron-down")}
                 </button>
                 <div class="ksb-dropdown-menu">
@@ -291,6 +301,13 @@ function ensureModalShell() {
     panel.addEventListener("click", async (event) => {
         if (!(event.target instanceof Element)) return;
 
+        const dropdownToggle = event.target.closest("[data-ksb-toggle-dropdown]");
+        if (dropdownToggle instanceof HTMLElement) {
+            toggleDropdown(dropdownToggle);
+            return;
+        }
+
+        closeDropdownsOutside(event.target);
 
         const swapButton = event.target.closest("[data-ksb-swap-from]");
         if (swapButton instanceof HTMLElement) {
@@ -324,6 +341,7 @@ function ensureModalShell() {
             } else if (action === "download-png") {
                 await handleDownloadPngAction();
             }
+            closeAllDropdowns();
             return;
         }
 
@@ -950,9 +968,45 @@ function closeScheduleBuilderModal() {
 }
 
 function handleScheduleBuilderKeydown(event) {
-    if (event.key === "Escape" && isScheduleBuilderExpanded()) {
+    if (event.key !== "Escape") return;
+
+    if (closeAllDropdowns()) {
+        return;
+    }
+
+    if (isScheduleBuilderExpanded()) {
         closeScheduleBuilderModal();
     }
+}
+
+function toggleDropdown(toggleButton) {
+    const dropdown = toggleButton.closest(".ksb-dropdown");
+    if (!(dropdown instanceof HTMLElement)) return;
+
+    const shouldOpen = !dropdown.classList.contains("ksb-dropdown--open");
+    closeAllDropdowns();
+    dropdown.classList.toggle("ksb-dropdown--open", shouldOpen);
+    toggleButton.setAttribute("aria-expanded", String(shouldOpen));
+}
+
+function closeDropdownsOutside(target) {
+    if (target.closest(".ksb-dropdown")) return false;
+    return closeAllDropdowns();
+}
+
+function closeAllDropdowns() {
+    let closedAny = false;
+
+    document.querySelectorAll(".ksb-dropdown--open").forEach((dropdown) => {
+        dropdown.classList.remove("ksb-dropdown--open");
+        const toggleButton = dropdown.querySelector("[data-ksb-toggle-dropdown]");
+        if (toggleButton instanceof HTMLElement) {
+            toggleButton.setAttribute("aria-expanded", "false");
+        }
+        closedAny = true;
+    });
+
+    return closedAny;
 }
 
 function addScheduleBuilderGlobalListeners() {
@@ -1196,19 +1250,21 @@ function renderSidebarLauncher(selectedCount) {
         ? "Close KMITL Schedule Builder"
         : "Show KMITL Schedule Builder";
 
-    const errorBadge = totalErrors > 0 
-        ? `<div class="ksb-sidebar-launcher-error-badge" title="${totalErrors} conflicts/duplicates detected">
+    const errorBadge = totalErrors > 0
+        ? `<span class="ksb-sidebar-launcher-error-badge" title="${totalErrors} conflicts/duplicates detected">
             ${ksbRenderIcon("warning")} ${totalErrors}
-          </div>`
+          </span>`
         : "";
 
     const launcherHtml = `
-        <div class="ksb-sidebar-launcher-title">
-            ${ksbRenderIcon("calendar")} Schedule Builder
-            <span class="ksb-attribution">Made by twtae & His beloved AI</span>
+        <div class="ksb-sidebar-launcher-header">
+            <div class="ksb-sidebar-launcher-title">${ksbRenderIcon("calendar")} Schedule Builder</div>
             ${errorBadge}
         </div>
-        <div class="ksb-sidebar-launcher-count">${ksbRenderIcon("selected")} Selected: ${ksbEscapeHtml(selectedCount)}</div>
+        <div class="ksb-sidebar-launcher-meta">
+            <span class="ksb-attribution">Made by twtae & His beloved AI</span>
+            <span class="ksb-sidebar-launcher-count">${ksbRenderIcon("selected")} Selected: ${ksbEscapeHtml(selectedCount)}</span>
+        </div>
         <button
             class="ksb-sidebar-launcher-button"
             type="button"
@@ -1685,6 +1741,12 @@ async function handleCopyAction(copyType) {
         groups: {
             text: buildSubjectGroupsText(selectedSubjects),
             successMessage: "Copied subject groups",
+        },
+        codes: {
+            text: [...new Set(selectedSubjects.map((subject) => ksbGetSubjectDisplayCode(subject)))]
+                .filter(Boolean)
+                .join("\n"),
+            successMessage: "Copied registration codes",
         },
     };
     const config = copyConfig[copyType];

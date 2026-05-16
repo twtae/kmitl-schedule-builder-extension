@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap');
-
 :root {
     --ksb-primary: #f15a24;
     --ksb-primary-dark: #d94a1b;
@@ -13,7 +11,7 @@
     --ksb-conflict: #ef4444;
     --ksb-conflict-bg: #fef2f2;
     --ksb-conflict-border: #f87171;
-    --ksb-font: 'Sarabun', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --ksb-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 }
 
 #kmitl-schedule-builder-launcher {
@@ -36,45 +34,63 @@
     background: #4a4a4a !important;
     color: #ffffff !important;
     font-family: var(--ksb-font) !important;
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.ksb-sidebar-launcher-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    min-width: 0 !important;
 }
 
 .ksb-sidebar-launcher-title {
-    position: relative !important;
-    margin-bottom: 4px !important;
-    padding-right: 45px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    min-width: 0 !important;
     color: #ffffff !important;
     font-size: 13px !important;
     font-weight: 700 !important;
     line-height: 1.25 !important;
-    display: block !important;
     text-indent: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .ksb-sidebar-launcher-error-badge {
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
     gap: 3px !important;
-    padding: 3px 7px !important;
+    flex: 0 0 auto !important;
+    padding: 3px 6px !important;
     background: #ef4444 !important;
     color: #ffffff !important;
-    border-radius: 20px !important;
+    border-radius: 999px !important;
     font-size: 11px !important;
     font-weight: 800 !important;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3) !important;
     line-height: 1 !important;
-    z-index: 10 !important;
+}
+
+.ksb-sidebar-launcher-meta {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    min-width: 0 !important;
 }
 
 .ksb-sidebar-launcher-count {
-    margin-bottom: 8px !important;
     color: #e5e5e5 !important;
     font-size: 12px !important;
     line-height: 1.3 !important;
-    display: block !important;
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
 }
 
 .ksb-sidebar-launcher-button {
@@ -203,9 +219,14 @@
     opacity: 0.8;
 }
 
-.ksb-sidebar-launcher-title .ksb-attribution {
+.ksb-sidebar-launcher-meta .ksb-attribution {
+    min-width: 0;
+    overflow: hidden;
     color: rgba(255, 255, 255, 0.7);
-    margin-left: 3px;
+    font-size: 10px;
+    margin-left: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .ksb-icon {
@@ -256,18 +277,6 @@
     gap: 6px !important;
 }
 
-.ksb-sidebar-launcher-title {
-    display: flex !important;
-    align-items: baseline !important;
-    gap: 4px !important;
-    margin-bottom: 4px !important;
-    color: #ffffff !important;
-    font-size: 13px !important;
-    font-weight: 700 !important;
-    line-height: 1.25 !important;
-    text-indent: 0 !important;
-}
-
 .ksb-conflict-title,
 .ksb-duplicate-title,
 .ksb-subject-group-title,
@@ -316,8 +325,7 @@
     animation: ksb-fade-in 0.2s ease;
 }
 
-.ksb-dropdown:hover .ksb-dropdown-menu,
-.ksb-dropdown:focus-within .ksb-dropdown-menu {
+.ksb-dropdown--open .ksb-dropdown-menu {
     display: block !important;
 }
 
@@ -711,10 +719,6 @@
     padding: 1px;
 }
 
-.ksb-theme-dark .ksb-timetable-block-conflict-icon {
-    background: #1e1e1e;
-}
-
 .ksb-timetable-block-name {
     display: -webkit-box;
     overflow: hidden;
@@ -943,37 +947,4 @@
     background: var(--ksb-primary) !important;
     color: white !important;
     border: none !important;
-}
-
-/* ───────────── Dark Mode Fixes ───────────── */
-
-.ksb-theme-dark #kmitl-schedule-builder-panel {
-    background: var(--ksb-bg-panel);
-    color: var(--ksb-text-main);
-    border-color: var(--ksb-border);
-}
-
-.ksb-theme-dark .ksb-panel-header,
-.ksb-theme-dark .ksb-panel-body {
-    background: var(--ksb-bg-panel);
-    border-color: var(--ksb-border);
-}
-
-.ksb-theme-dark .ksb-timetable-grid {
-    background: var(--ksb-bg-body);
-}
-
-.ksb-theme-dark .ksb-timetable-cell {
-    background: var(--ksb-bg-panel);
-    border-color: var(--ksb-border);
-}
-
-.ksb-theme-dark .ksb-timetable-cell:nth-child(odd) {
-    background: var(--ksb-bg-body);
-}
-
-.ksb-theme-dark .ksb-timetable-day,
-.ksb-theme-dark .ksb-timetable-header {
-    background: var(--ksb-border);
-    color: var(--ksb-text-main);
 }
