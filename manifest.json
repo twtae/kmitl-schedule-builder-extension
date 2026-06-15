@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "KMITL Schedule Builder",
-	"version": "0.3.1",
+	"version": "0.4.0",
 	"description": "Enhanced timetable builder for KMITL with conflict suggestions and schedule sharing.",
 	"icons": {
 		"16": "icons/icon16.png",
@@ -24,6 +24,11 @@
 		"service_worker": "background.js"
 	},
 	"content_scripts": [
+		{
+			"matches": ["https://regis.reg.kmitl.ac.th/*"],
+			"js": ["src/dark-mode-init.js"],
+			"run_at": "document_start"
+		},
 		{
 			"matches": ["https://regis.reg.kmitl.ac.th/*"],
 			"js": [

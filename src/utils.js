@@ -12,6 +12,7 @@ const KSB_STORAGE_KEY = "kmitl_schedule_builder_selected_subjects";
 const KSB_CATEGORY_OVERRIDES_KEY = "kmitl_schedule_builder_category_overrides";
 const KSB_OFFLINE_CACHE_KEY = "kmitl_schedule_builder_offline_cache";
 const KSB_SEMESTER_START_KEY = "kmitl_schedule_builder_semester_start";
+const DARK_MODE_STORAGE_KEY = "kmitl_schedule_builder_dark_mode_enabled";
 
 /* ───────────── Extension flags ───────────── */
 

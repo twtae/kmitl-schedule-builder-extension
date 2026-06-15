@@ -15,7 +15,36 @@ let showSubjectGroups = false;
 let showSelectedList = false;
 
 
+function applyDarkMode(enabled) {
+    if (enabled) {
+        document.documentElement.classList.add("ksb-dark-mode");
+    } else {
+        document.documentElement.classList.remove("ksb-dark-mode");
+    }
+}
+
 async function init() {
+    // Inject extension stylesheet unconditionally on page load so dark mode is active immediately
+    injectExtensionStyles();
+
+    // Read and apply initial dark mode preference
+    try {
+        const isDarkMode = await ksbStorageGet(DARK_MODE_STORAGE_KEY);
+        applyDarkMode(Boolean(isDarkMode));
+    } catch (err) {
+        if (KSB_DEBUG_UI) console.warn("[KSB] Failed to load dark mode preference:", err);
+    }
+
+    // Set up reactive listener for changes in chrome.storage
+    if (typeof chrome !== "undefined" && chrome.storage && chrome.storage.onChanged) {
+        chrome.storage.onChanged.addListener((changes, areaName) => {
+            if (areaName !== "local") return;
+            if (changes[DARK_MODE_STORAGE_KEY]) {
+                applyDarkMode(Boolean(changes[DARK_MODE_STORAGE_KEY].newValue));
+            }
+        });
+    }
+
     window.addEventListener("hashchange", handleRouteChange);
     window.addEventListener("popstate", handleRouteChange);
     
@@ -152,7 +181,6 @@ function cleanupScheduleBuilderUi() {
     updateVisibleSubjectIssueMarkers(new Set(), new Set());
     document.querySelector("#kmitl-schedule-builder-launcher")?.remove();
     document.querySelector("#kmitl-schedule-builder-modal-overlay")?.remove();
-    document.querySelector(`#${KSB_EXTENSION_STYLE_ID}`)?.remove();
 
     document.querySelectorAll(KSB_CHECKBOX_WRAPPER_SELECTOR).forEach((wrapper) => {
         const owner = wrapper.closest(`[${KSB_EXTENSION_FLAG}]`);
@@ -1460,10 +1488,12 @@ function renderTimetableCell(slot) {
 function renderTimetableSubjectBlock(subject, conflictingSubjectIds = new Set(), duplicateSubjectIds = new Set()) {
     const placement = getSubjectGridPlacement(subject);
     const location = ksbGetSubjectDisplayLocation(subject);
-    const catStyle = ksbGetCategoryStyle(ksbGetSubjectDisplayCode(subject));
+    const subjectCode = ksbGetSubjectDisplayCode(subject);
+    const catStyle = ksbGetCategoryStyle(subjectCode);
     const isTimeConflict = isSubjectConflicting(subject, conflictingSubjectIds);
     const isDuplicateConflict = duplicateSubjectIds.has(subject.id);
     const isConflict = isTimeConflict || isDuplicateConflict;
+    const categoryClass = `ksb-cat-${ksbDetectCategory(subjectCode)}`;
     
     const style = `
         grid-column: ${placement.columnStart} / span ${placement.columnSpan};
@@ -1476,7 +1506,7 @@ function renderTimetableSubjectBlock(subject, conflictingSubjectIds = new Set(),
 
     return `
     <div
-        class="ksb-timetable-block${isConflict ? " ksb-timetable-block--conflict" : ""}"
+        class="ksb-timetable-block ${categoryClass}${isConflict ? " ksb-timetable-block--conflict" : ""}"
         style="${style}"
         title="${ksbEscapeHtml(ksbGetSubjectDisplayName(subject))}${isConflict ? " (Conflict/Duplicate Selection)" : ""}"
     >
@@ -2138,9 +2168,10 @@ function renderSelectedSubjectCard(subject, conflictingSubjectIds = new Set()) {
     const conflictClass = isSubjectConflicting(subject, conflictingSubjectIds)
         ? " ksb-selected-subject--conflict"
         : "";
+    const categoryClass = `ksb-cat-${ksbDetectCategory(code)}`;
 
     return `
-    <div class="ksb-selected-subject${conflictClass}" data-ksb-selected-subject-id="${subjectId}">
+    <div class="ksb-selected-subject ${categoryClass}${conflictClass}" data-ksb-selected-subject-id="${subjectId}">
         <div class="ksb-selected-subject-top">
             <div class="ksb-selected-subject-title">
                 <div class="ksb-selected-subject-name">${ksbEscapeHtml(ksbGetSubjectDisplayName(subject))}</div>

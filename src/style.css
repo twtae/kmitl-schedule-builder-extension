@@ -23,20 +23,21 @@
     bottom: var(--ksb-launcher-bottom, 16px) !important;
     top: auto !important;
     width: var(--ksb-launcher-width, 260px) !important;
-    z-index: 2147483640 !important;
+    z-index: 99 !important;
     pointer-events: auto !important;
     box-sizing: border-box !important;
     margin: 0 !important;
     padding: 10px !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border: 1px solid #dedede !important;
     border-left: 3px solid #f15a24 !important;
     border-radius: 6px !important;
-    background: #4a4a4a !important;
-    color: #ffffff !important;
+    background: #ffffff !important;
+    color: #333333 !important;
     font-family: var(--ksb-font) !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 8px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
 }
 
 .ksb-sidebar-launcher-header {
@@ -52,7 +53,7 @@
     align-items: center !important;
     gap: 5px !important;
     min-width: 0 !important;
-    color: #ffffff !important;
+    color: inherit !important;
     font-size: 13px !important;
     font-weight: 700 !important;
     line-height: 1.25 !important;
@@ -86,7 +87,7 @@
 }
 
 .ksb-sidebar-launcher-count {
-    color: #e5e5e5 !important;
+    color: #666666 !important;
     font-size: 12px !important;
     line-height: 1.3 !important;
     white-space: nowrap !important;
@@ -112,7 +113,7 @@
     visibility: visible !important;
     text-indent: 0 !important;
     position: relative !important;
-    z-index: 2147483647 !important;
+    z-index: 99 !important;
     font-family: var(--ksb-font) !important;
     box-sizing: border-box !important;
 }
@@ -222,7 +223,7 @@
 .ksb-sidebar-launcher-meta .ksb-attribution {
     min-width: 0;
     overflow: hidden;
-    color: rgba(255, 255, 255, 0.7);
+    color: #888888 !important;
     font-size: 10px;
     margin-left: 0;
     text-overflow: ellipsis;
@@ -424,6 +425,10 @@
 .ksb-subject-checkbox:focus-visible {
     outline: 2px solid #f15a24 !important;
     outline-offset: 2px !important;
+}
+
+.ksb-subject-checkbox {
+    accent-color: #f15a24 !important;
 }
 
 .ksb-panel-toolbar {
@@ -999,3 +1004,782 @@
     color: white !important;
     border: none !important;
 }
+
+/* ───────────── Dark Mode Overrides ───────────── */
+
+html.ksb-dark-mode {
+    --ksb-page-bg: #111827;
+    --ksb-surface: #1f2937;
+    --ksb-surface-2: #273244;
+    --ksb-dark-border: #374151;
+    --ksb-text: #e5e7eb;
+    --ksb-muted-text: #9ca3af;
+    --ksb-accent: #f15a24;
+    --ksb-accent-hover: #ff6b35;
+
+    /* Override extension internal color variables for dark mode */
+    --ksb-bg-panel: var(--ksb-surface);
+    --ksb-bg-body: var(--ksb-page-bg);
+    --ksb-text-main: var(--ksb-text);
+    --ksb-text-muted: var(--ksb-muted-text);
+    --ksb-border: var(--ksb-dark-border);
+    --ksb-shadow: rgba(0, 0, 0, 0.5);
+    
+    --ksb-conflict: #f87171;
+    --ksb-conflict-bg: #2e1818;
+    --ksb-conflict-border: #ef4444;
+    --ksb-primary-light: #431407;
+}
+
+/* 1. Global / App Background & Text */
+html.ksb-dark-mode body,
+html.ksb-dark-mode #app,
+html.ksb-dark-mode .v-application,
+html.ksb-dark-mode .v-main,
+html.ksb-dark-mode main {
+    background-color: var(--ksb-page-bg) !important;
+    color: var(--ksb-text) !important;
+}
+
+/* 2. Top Header / Navbar */
+html.ksb-dark-mode .v-app-bar,
+html.ksb-dark-mode .v-toolbar,
+html.ksb-dark-mode header,
+html.ksb-dark-mode .v-app-bar.v-sheet,
+html.ksb-dark-mode .v-toolbar.v-sheet,
+html.ksb-dark-mode header.v-sheet,
+html.ksb-dark-mode .v-app-bar-title__content {
+    background-color: var(--ksb-surface) !important;
+    color: var(--ksb-text) !important;
+    border: none !important;
+}
+
+/* 3. Left Sidebar & Lists */
+html.ksb-dark-mode .v-navigation-drawer,
+html.ksb-dark-mode .v-navigation-drawer__content,
+html.ksb-dark-mode .v-list,
+html.ksb-dark-mode .v-list-group {
+    background-color: var(--ksb-surface) !important;
+    color: var(--ksb-text) !important;
+    border-color: var(--ksb-border) !important;
+    overflow: hidden !important;
+}
+
+html.ksb-dark-mode .v-list-item,
+html.ksb-dark-mode .v-list-item__title,
+html.ksb-dark-mode .v-list-item__subtitle {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .v-list-item:hover,
+html.ksb-dark-mode .v-list-item--active {
+    background-color: var(--ksb-surface-2) !important;
+    color: var(--ksb-accent) !important;
+}
+
+html.ksb-dark-mode .v-list-item::before {
+    border-radius: inherit !important;
+}
+
+html.ksb-dark-mode .v-navigation-drawer .v-list {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* 4. Cards & Panels */
+html.ksb-dark-mode .v-card,
+html.ksb-dark-mode .v-sheet,
+html.ksb-dark-mode .card,
+html.ksb-dark-mode .panel,
+html.ksb-dark-mode .card-box {
+    background-color: var(--ksb-surface) !important;
+    color: var(--ksb-text) !important;
+    border: none !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5) !important;
+}
+
+html.ksb-dark-mode .v-card__title,
+html.ksb-dark-mode .v-card__subtitle,
+html.ksb-dark-mode .v-card__text,
+html.ksb-dark-mode .v-card__actions,
+html.ksb-dark-mode .v-toolbar__title {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .text-primary,
+html.ksb-dark-mode .text-secondary,
+html.ksb-dark-mode .gtext {
+    color: var(--ksb-muted-text) !important;
+}
+
+/* 5. Tables & Headers */
+html.ksb-dark-mode table,
+html.ksb-dark-mode .v-data-table,
+html.ksb-dark-mode .greattable {
+    background-color: var(--ksb-surface) !important;
+    color: var(--ksb-text) !important;
+    border-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode table th,
+html.ksb-dark-mode thead,
+html.ksb-dark-mode thead tr,
+html.ksb-dark-mode thead.pattern,
+html.ksb-dark-mode .thead-config {
+    background-color: var(--ksb-surface-2) !important;
+    color: var(--ksb-text) !important;
+    border-bottom: 2px solid var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode table td {
+    background-color: transparent !important;
+    color: var(--ksb-text) !important;
+    border-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode tbody tr {
+    background-color: transparent !important;
+    color: var(--ksb-text) !important;
+    border-bottom: 1px solid var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode tbody tr:hover {
+    background-color: var(--ksb-surface-2) !important;
+}
+
+/* 6. Form Readability (Inputs, Dropdowns, Selects, Buttons) */
+html.ksb-dark-mode input:not([type="checkbox"]):not([type="radio"]),
+html.ksb-dark-mode select,
+html.ksb-dark-mode textarea {
+    background-color: var(--ksb-surface-2) !important;
+    color: var(--ksb-text) !important;
+    border-color: var(--ksb-border) !important;
+}
+
+/* Make all text inputs inside Vuetify fields transparent to avoid covering border outlines */
+html.ksb-dark-mode .v-input input,
+html.ksb-dark-mode .v-input input[type="text"],
+html.ksb-dark-mode .v-text-field input,
+html.ksb-dark-mode .v-text-field__slot input,
+html.ksb-dark-mode .v-select__slot input,
+html.ksb-dark-mode .v-autocomplete input,
+html.ksb-dark-mode .v-input select,
+html.ksb-dark-mode .v-input textarea,
+html.ksb-dark-mode .v-select__selection,
+html.ksb-dark-mode .v-select__selection--comma {
+    background-color: transparent !important;
+    background: transparent !important;
+    color: var(--ksb-text) !important;
+}
+
+/* Style default and filled input slots with surface background */
+html.ksb-dark-mode .v-input:not(.v-input--selection-controls) .v-input__slot,
+html.ksb-dark-mode .v-text-field--solo .v-input__slot,
+html.ksb-dark-mode .v-text-field--filled > .v-input__control > .v-input__slot,
+html.ksb-dark-mode .theme--light.v-text-field--solo > .v-input__control > .v-input__slot,
+html.ksb-dark-mode .theme--light.v-text-field--solo > .v-input__control > .v-input__slot * {
+    border-color: var(--ksb-border) !important;
+    background-color: var(--ksb-surface-2) !important;
+    background: var(--ksb-surface-2) !important;
+    color: var(--ksb-text) !important;
+}
+
+/* Outlined fields: background is on the fieldset, slot is transparent to prevent border clipping */
+html.ksb-dark-mode .v-text-field--outlined > .v-input__control > .v-input__slot {
+    background-color: transparent !important;
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+html.ksb-dark-mode .v-text-field--outlined fieldset,
+html.ksb-dark-mode .theme--light.v-text-field--outlined fieldset {
+    border-color: var(--ksb-border) !important;
+    background-color: var(--ksb-surface-2) !important;
+    background: var(--ksb-surface-2) !important;
+    color: var(--ksb-text) !important;
+}
+
+/* General input control wrappers must be transparent to avoid box extensions */
+html.ksb-dark-mode .v-input__control {
+    background-color: transparent !important;
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+html.ksb-dark-mode .v-input--is-focused fieldset {
+    border-color: var(--ksb-accent) !important;
+}
+
+/* Fix checkbox, radio and switch control and slot backgrounds */
+html.ksb-dark-mode .v-input--selection-controls,
+html.ksb-dark-mode .v-input--selection-controls__input,
+html.ksb-dark-mode .v-input--selection-controls__ripple,
+html.ksb-dark-mode .v-input--selection-controls .v-input__control,
+html.ksb-dark-mode .v-input--selection-controls .v-input__slot,
+html.ksb-dark-mode .v-simple-checkbox,
+html.ksb-dark-mode .v-simple-checkbox * {
+    background-color: transparent !important;
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+/* Make inner slots transparent to prevent border outline clipping */
+html.ksb-dark-mode .v-text-field__slot,
+html.ksb-dark-mode .v-select__slot,
+html.ksb-dark-mode .v-select__selections,
+html.ksb-dark-mode .theme--light.v-text-field--solo > .v-input__control > .v-input__slot * {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Restore correct opacity for disabled inputs, checkboxes, labels and icons in dark mode */
+html.ksb-dark-mode .v-input--is-disabled,
+html.ksb-dark-mode .v-icon--disabled {
+    opacity: 0.55 !important;
+}
+
+html.ksb-dark-mode .theme--light.v-select .v-select__slot input,
+html.ksb-dark-mode .theme--light.v-select .v-select__slot .v-select__selections {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .v-input__icon .v-icon,
+html.ksb-dark-mode .v-select__arrow,
+html.ksb-dark-mode .theme--light.v-icon {
+    color: var(--ksb-text) !important;
+}
+
+/* Vuetify Tabs & Slide Groups */
+html.ksb-dark-mode .v-tabs,
+html.ksb-dark-mode .v-tabs-bar,
+html.ksb-dark-mode .v-slide-group,
+html.ksb-dark-mode .v-slide-group__wrapper,
+html.ksb-dark-mode .theme--light.v-tabs-bar,
+html.ksb-dark-mode .v-tabs-items,
+html.ksb-dark-mode .theme--light.v-tabs-items,
+html.ksb-dark-mode .v-window,
+html.ksb-dark-mode .theme--light.v-window {
+    background-color: var(--ksb-surface) !important;
+    background: var(--ksb-surface) !important;
+    border-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .v-tab {
+    background-color: transparent !important;
+    color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode .v-tab:not(.v-tab--active) {
+    color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode .v-tab--active,
+html.ksb-dark-mode .theme--light.v-tabs-bar .v-tab--active {
+    color: var(--ksb-accent) !important;
+    background-color: var(--ksb-surface-2) !important;
+}
+
+/* Dropdown Menu Overlay Option Popups */
+html.ksb-dark-mode .v-menu__content,
+html.ksb-dark-mode .v-select__content,
+html.ksb-dark-mode .v-autocomplete__content,
+html.ksb-dark-mode .v-menu__content .v-list,
+html.ksb-dark-mode .v-select__content .v-list,
+html.ksb-dark-mode .v-autocomplete__content .v-list,
+html.ksb-dark-mode .theme--light.v-list,
+html.ksb-dark-mode .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+    background-color: var(--ksb-surface) !important;
+    background: var(--ksb-surface) !important;
+    border-color: var(--ksb-border) !important;
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .v-menu__content .v-list-item__title,
+html.ksb-dark-mode .v-menu__content .v-list-item__subtitle,
+html.ksb-dark-mode .v-select__content .v-list-item__title,
+html.ksb-dark-mode .v-autocomplete__content .v-list-item__title,
+html.ksb-dark-mode .v-list-item__title,
+html.ksb-dark-mode .v-list-item__subtitle,
+html.ksb-dark-mode .theme--light.v-list-item .v-list-item__title,
+html.ksb-dark-mode .theme--light.v-list-item .v-list-item__subtitle {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .v-menu__content .v-list-item:hover,
+html.ksb-dark-mode .v-menu__content .v-list-item--active,
+html.ksb-dark-mode .v-select__content .v-list-item:hover,
+html.ksb-dark-mode .v-select__content .v-list-item--active,
+html.ksb-dark-mode .v-list-item--highlighted,
+html.ksb-dark-mode .theme--light.v-list-item:hover,
+html.ksb-dark-mode .theme--light.v-list-item--active {
+    background-color: var(--ksb-surface-2) !important;
+    color: var(--ksb-accent) !important;
+}
+
+html.ksb-dark-mode .v-menu__content,
+html.ksb-dark-mode .v-select__content,
+html.ksb-dark-mode .v-autocomplete__content {
+    border: 1px solid var(--ksb-border) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
+}
+
+html.ksb-dark-mode input::placeholder,
+html.ksb-dark-mode textarea::placeholder {
+    color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode label,
+html.ksb-dark-mode .v-label,
+html.ksb-dark-mode .theme--light.v-label {
+    color: var(--ksb-muted-text) !important;
+}
+
+/* Buttons */
+html.ksb-dark-mode button:not(.v-btn--has-bg),
+html.ksb-dark-mode .v-btn:not(.v-btn--has-bg) {
+    background-color: var(--ksb-surface-2) !important;
+    color: var(--ksb-text) !important;
+    border: 1px solid var(--ksb-border) !important;
+}
+
+/* Vuetify colored buttons (amber, green, etc.) — darken but preserve their identity */
+html.ksb-dark-mode .v-btn.v-btn--has-bg.amber {
+    background-color: #b45309 !important;
+    color: #ffffff !important;
+    border: 1px solid #92400e !important;
+}
+html.ksb-dark-mode .v-btn.v-btn--has-bg.amber:hover {
+    background-color: #92400e !important;
+}
+
+html.ksb-dark-mode button:hover,
+html.ksb-dark-mode .v-btn:hover {
+    background-color: var(--ksb-surface) !important;
+    border-color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode button.primary,
+html.ksb-dark-mode .v-btn.primary,
+html.ksb-dark-mode .primary,
+html.ksb-dark-mode button.major,
+html.ksb-dark-mode .v-btn.major,
+html.ksb-dark-mode .major {
+    background-color: var(--ksb-accent) !important;
+    border-color: var(--ksb-accent) !important;
+    color: #ffffff !important;
+}
+
+html.ksb-dark-mode button.primary:hover,
+html.ksb-dark-mode .v-btn.primary:hover,
+html.ksb-dark-mode button.major:hover,
+html.ksb-dark-mode .v-btn.major:hover {
+    background-color: var(--ksb-accent-hover) !important;
+}
+
+html.ksb-dark-mode .v-btn.v-btn--disabled {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    border-color: transparent !important;
+}
+
+/* 7. Modals / Dialogs */
+html.ksb-dark-mode .v-overlay__scrim {
+    background-color: rgba(17, 24, 39, 0.7) !important;
+}
+
+html.ksb-dark-mode .v-dialog .v-card,
+html.ksb-dark-mode .v-dialog .v-sheet {
+    background-color: var(--ksb-surface) !important;
+    color: var(--ksb-text) !important;
+    border: 1px solid var(--ksb-border) !important;
+}
+
+/* 8. Links & Badges */
+html.ksb-dark-mode a {
+    color: var(--ksb-accent) !important;
+}
+
+html.ksb-dark-mode a:hover {
+    color: var(--ksb-accent-hover) !important;
+}
+
+html.ksb-dark-mode .text-success-alert { color: #86efac !important; }
+html.ksb-dark-mode .text-danger-alert { color: #fca5a5 !important; }
+html.ksb-dark-mode .text-warning-alert { color: #fde047 !important; }
+html.ksb-dark-mode .text-info-alert { color: #93c5fd !important; }
+
+/* 9. Extension Timetable / Selected UI overrides for Dark Mode compatibility */
+html.ksb-dark-mode #kmitl-schedule-builder-panel {
+    border-color: var(--ksb-border) !important;
+    background-color: var(--ksb-surface) !important;
+}
+
+html.ksb-dark-mode .ksb-panel-header {
+    background-color: var(--ksb-surface) !important;
+    border-bottom-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .ksb-panel-title strong {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-panel-body {
+    background-color: var(--ksb-page-bg) !important;
+}
+
+html.ksb-dark-mode .ksb-dropdown-menu {
+    background-color: var(--ksb-surface) !important;
+    border-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .ksb-dropdown-item {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-dropdown-item:hover {
+    background-color: var(--ksb-surface-2) !important;
+    color: var(--ksb-accent) !important;
+}
+
+html.ksb-dark-mode .ksb-export-button,
+html.ksb-dark-mode .ksb-section-toggle,
+html.ksb-dark-mode #ksb-clear-button,
+html.ksb-dark-mode #ksb-collapse-button,
+html.ksb-dark-mode .ksb-remove-subject-button {
+    background-color: var(--ksb-surface-2) !important;
+    border-color: var(--ksb-border) !important;
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-section-toggle[aria-expanded="true"] {
+    background-color: var(--ksb-surface-2) !important;
+    border-color: var(--ksb-accent) !important;
+    color: var(--ksb-accent) !important;
+}
+
+html.ksb-dark-mode #ksb-clear-button:hover,
+html.ksb-dark-mode #ksb-collapse-button:hover,
+html.ksb-dark-mode .ksb-remove-subject-button:hover {
+    background-color: #7f1d1d !important;
+    border-color: #f87171 !important;
+    color: #fca5a5 !important;
+}
+
+html.ksb-dark-mode .ksb-export-button:hover,
+html.ksb-dark-mode .ksb-section-toggle:hover {
+    background-color: var(--ksb-surface) !important;
+}
+
+html.ksb-dark-mode .ksb-empty-state {
+    background-color: var(--ksb-surface) !important;
+    border-color: var(--ksb-border) !important;
+    color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-scroll {
+    border-color: var(--ksb-border) !important;
+    background-color: var(--ksb-surface) !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-header {
+    background-color: var(--ksb-surface-2) !important;
+    border-bottom-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-corner,
+html.ksb-dark-mode .ksb-timetable-hour,
+html.ksb-dark-mode .ksb-timetable-day {
+    color: var(--ksb-text) !important;
+    border-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-day {
+    background-color: var(--ksb-surface-2) !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-cell {
+    background-color: var(--ksb-surface) !important;
+    border-left-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-cell:nth-child(odd) {
+    background-color: var(--ksb-surface-2) !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-row {
+    border-bottom-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .ksb-unplaceable-subjects {
+    background-color: var(--ksb-surface) !important;
+    border-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .ksb-unplaceable-subject {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-unplaceable-subject span {
+    color: var(--ksb-muted-text) !important;
+}
+
+/* Category-specific color overrides for Timetable Blocks and Selected cards in dark mode */
+html.ksb-dark-mode .ksb-timetable-block.ksb-cat-gen-ed {
+    background-color: #042f2e !important;
+    border-color: #0d9488 !important;
+    border-left-color: #0d9488 !important;
+    color: #e5e7eb !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-block.ksb-cat-major {
+    background-color: #431407 !important;
+    border-color: #f15a24 !important;
+    border-left-color: #f15a24 !important;
+    color: #e5e7eb !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-block.ksb-cat-unknown {
+    background-color: #1f2937 !important;
+    border-color: #4b5563 !important;
+    border-left-color: #4b5563 !important;
+    color: #e5e7eb !important;
+}
+
+html.ksb-dark-mode .ksb-selected-subject {
+    background-color: var(--ksb-surface) !important;
+    border-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .ksb-selected-subject.ksb-cat-gen-ed {
+    border-left-color: #0d9488 !important;
+}
+
+html.ksb-dark-mode .ksb-selected-subject.ksb-cat-major {
+    border-left-color: #f15a24 !important;
+}
+
+html.ksb-dark-mode .ksb-selected-subject.ksb-cat-unknown {
+    border-left-color: #4b5563 !important;
+}
+
+html.ksb-dark-mode .ksb-selected-subject-name,
+html.ksb-dark-mode .ksb-selected-subject-code {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-selected-subject-meta,
+html.ksb-dark-mode .ksb-selected-subject-room,
+html.ksb-dark-mode .ksb-selected-subject-teacher {
+    color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-block-name {
+    color: #ffffff !important;
+}
+
+html.ksb-dark-mode .ksb-timetable-block-meta,
+html.ksb-dark-mode .ksb-timetable-block-time,
+html.ksb-dark-mode .ksb-timetable-block-location {
+    color: #d1d5db !important;
+}
+
+/* Injected checkboxes styling */
+html.ksb-dark-mode .ksb-checkbox-wrapper {
+    background-color: var(--ksb-surface-2) !important;
+    background: var(--ksb-surface-2) !important;
+    border-color: var(--ksb-border) !important;
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-checkbox-wrapper--conflict,
+html.ksb-dark-mode .ksb-checkbox-wrapper--duplicate {
+    background-color: var(--ksb-conflict-bg) !important;
+    background: var(--ksb-conflict-bg) !important;
+    border-color: var(--ksb-conflict) !important;
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-checkbox-label {
+    color: var(--ksb-text) !important;
+}
+
+/* Fix Conflict/Duplicate Row Contrast in Dark Mode Table */
+html.ksb-dark-mode .ksb-subject-source--conflict > td,
+html.ksb-dark-mode .ksb-subject-source--duplicate > td,
+html.ksb-dark-mode .ksb-subject-source--conflict:not(tr),
+html.ksb-dark-mode .ksb-subject-source--duplicate:not(tr) {
+    background-color: var(--ksb-conflict-bg) !important;
+    background: var(--ksb-conflict-bg) !important;
+    color: var(--ksb-text) !important;
+}
+
+/* Fix Conflict Warning Container Contrast in Dark Mode Sidebar */
+html.ksb-dark-mode .ksb-conflict-warning {
+    color: #fca5a5 !important; /* Light red text */
+}
+html.ksb-dark-mode .ksb-conflict-item {
+    color: #fecaca !important;
+}
+html.ksb-dark-mode .ksb-conflict-item span {
+    color: #fca5a5 !important;
+}
+
+/* Fix Duplicate Warning Container Contrast in Dark Mode Sidebar */
+html.ksb-dark-mode .ksb-duplicate-warning {
+    color: #ffedd5 !important; /* Light orange text */
+}
+html.ksb-dark-mode .ksb-duplicate-item {
+    color: #fed7aa !important;
+}
+html.ksb-dark-mode .ksb-duplicate-item span,
+html.ksb-dark-mode .ksb-duplicate-item em {
+    color: #fdba74 !important;
+}
+
+/* KSB 9-point Dark Mode fixes */
+html.ksb-dark-mode .deep-orange.lighten-3 {
+    background-color: #7c2d12 !important;
+    color: #ffffff !important;
+}
+
+html.ksb-dark-mode .indigo--text,
+html.ksb-dark-mode .theme--light.indigo--text {
+    color: #93c5fd !important;
+}
+
+html.ksb-dark-mode .ksb-checkbox-issue-badge {
+    background-color: #991b1b !important;
+    color: #fca5a5 !important;
+}
+
+html.ksb-dark-mode #kmitl-schedule-builder-launcher {
+    background: var(--ksb-surface) !important;
+    color: var(--ksb-text) !important;
+    border-color: var(--ksb-border) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+html.ksb-dark-mode .ksb-sidebar-launcher-title {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-sidebar-launcher-count {
+    color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode .ksb-sidebar-launcher-meta .ksb-attribution {
+    color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode .ksb-sidebar-launcher-button {
+    background-color: var(--ksb-surface-2) !important;
+    border-color: var(--ksb-border) !important;
+}
+html.ksb-dark-mode .ksb-sidebar-launcher-button,
+html.ksb-dark-mode .ksb-sidebar-launcher-button *,
+html.ksb-dark-mode .ksb-sidebar-launcher-button-text {
+    color: var(--ksb-text) !important;
+}
+html.ksb-dark-mode .ksb-sidebar-launcher-button:hover {
+    background-color: var(--ksb-surface) !important;
+    border-color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode .ksb-legend-item,
+html.ksb-dark-mode .ksb-category-legend {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-subject-group-summary,
+html.ksb-dark-mode .ksb-subject-group,
+html.ksb-dark-mode .ksb-subject-group-component {
+    background-color: var(--ksb-surface-2) !important;
+    color: var(--ksb-text) !important;
+    border-color: var(--ksb-border) !important;
+}
+
+html.ksb-dark-mode .ksb-subject-group-header {
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode .ksb-subject-group-header span,
+html.ksb-dark-mode .ksb-subject-group-header em {
+    color: var(--ksb-muted-text) !important;
+}
+
+html.ksb-dark-mode .ksb-subject-group-component {
+    background-color: var(--ksb-surface) !important;
+}
+
+/* Pre-registration Page Dark Mode Fixes */
+
+/* 1. Stepper / Progress block: remove border entirely */
+html.ksb-dark-mode .v-stepper {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* 2. Stepper labels: white text */
+html.ksb-dark-mode .v-stepper__label {
+    color: var(--ksb-text) !important;
+}
+
+/* 3. Stepper connecting lines: visible on dark background */
+html.ksb-dark-mode .v-stepper__header .v-divider,
+html.ksb-dark-mode .v-stepper__header .v-divider.theme--light {
+    border-top-color: var(--ksb-border) !important;
+}
+
+/* 4. Info card (grey.lighten-2): match dark mode */
+html.ksb-dark-mode .grey.lighten-2 {
+    background-color: var(--ksb-surface-2) !important;
+    color: var(--ksb-text) !important;
+}
+
+/* 7. Maintain Status page: make detail text white */
+html.ksb-dark-mode .ctext,
+html.ksb-dark-mode .ctext * {
+    color: #ffffff !important;
+}
+
+/* 9. Main Page Buttons: label text colors */
+html.ksb-dark-mode a.v-btn[href="#/information"],
+html.ksb-dark-mode a.v-btn[href="#/information"] *,
+html.ksb-dark-mode a.v-btn[href="#/information"] .v-btn__content,
+html.ksb-dark-mode a.v-btn[href="#/information"] .v-icon {
+    color: #000000 !important;
+}
+
+html.ksb-dark-mode a.v-btn[href="#/pre_registration"],
+html.ksb-dark-mode a.v-btn[href="#/pre_registration"] *,
+html.ksb-dark-mode a.v-btn[href="#/registration"],
+html.ksb-dark-mode a.v-btn[href="#/registration"] *,
+html.ksb-dark-mode a.v-btn[href="#/payment"],
+html.ksb-dark-mode a.v-btn[href="#/payment"] *,
+html.ksb-dark-mode a.v-btn[href="#/payment"] .v-icon {
+    color: #ffffff !important;
+}
+
+/* 10. Questionnaire page fixes */
+html.ksb-dark-mode .v-rating button,
+html.ksb-dark-mode .v-rating button.v-icon {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+html.ksb-dark-mode .text-tag-5 {
+    color: #fde047 !important;
+}
+
+/* 11. Payment page fixes: shield icon contrast */
+html.ksb-dark-mode .gradient-text1,
+html.ksb-dark-mode .v-icon.mdi-shield-check.gradient-text1 {
+    background: linear-gradient(90deg, #9ca3af 0%, #ffffff 50%, #9ca3af 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+
+
+

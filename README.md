@@ -10,6 +10,7 @@ An unofficial Chrome extension for the KMITL registration website (regis.reg.kmi
 - Grouping Summary: Shows a summary of selected theory, practical, and seminar components.
 - Export Options: Download the timetable as a PNG image or copy data as plain text.
 - Local Persistence: Selected subjects are saved in your browser and survive page refreshes.
+- Dark Mode: Premium, site-wide dark theme for the entire registration website (`regis.reg.kmitl.ac.th`).
 
 ## Screenshots
 
@@ -44,7 +45,7 @@ There are two ways to install the extension locally.
 ### Option 1: Download from the release page
 
 1. Go to the [Releases page](https://github.com/twtae/kmitl-schedule-builder-extension/releases).
-2. Download the latest release ZIP, for example `kmitl-schedule-builder-extension-v0.3.1.zip`.
+2. Download the latest release ZIP, for example `kmitl-schedule-builder-extension-v0.4.0.zip`.
 3. Extract the ZIP file.
 4. Open Google Chrome and navigate to `chrome://extensions`.
 5. Enable "Developer mode" using the toggle in the top-right corner.
@@ -72,6 +73,7 @@ There are two ways to install the extension locally.
 4. Check the "Add" boxes next to the subjects you want to include.
 5. Use the "Schedule Builder" launcher in the bottom-left corner to open the timetable modal.
 6. Review your schedule, check for conflicts, and use the export buttons to save your plan.
+7. Click the extension icon in your browser toolbar to toggle Dark Mode on/off. The preference is stored locally and applies immediately across all pages on the site.
 
 ## Privacy and Safety
 
