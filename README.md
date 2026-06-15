@@ -38,6 +38,16 @@ Review selected classes in a weekly timetable.
 
 Download the generated timetable as a PNG image for sharing or saving.
 
+### Dark Mode (Premium Site-wide Theme)
+
+![Dark Mode Pre-Registration Page](docs/images/dark_mode_pre_reg.png)
+
+A fully-customized, high-contrast dark theme applied across all KMITL registration pages (including Pre-registration, Maintain Status, Payment, and Questionnaire).
+
+![Dark Mode Schedule Builder Launcher](docs/images/dark_mode_launcher.png)
+
+Toggle dark mode on/off instantly via the extension popup. The theme preference is stored locally and persists across visits.
+
 ## Installation
 
 There are two ways to install the extension locally.
