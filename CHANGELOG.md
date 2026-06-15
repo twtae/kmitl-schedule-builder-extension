@@ -1,3 +1,9 @@
+## 0.4.0
+- Add premium, site-wide dark mode support for `regis.reg.kmitl.ac.th`
+- Inject styling immediately at `document_start` to prevent flash of light theme
+- Enhance visual contrast and colors for Main Page, Pre-registration, Maintain Status, Payment, Questionnaire, and Timetable views
+- Add a Dark Mode toggle switch inside the extension popup menu
+
 ## 0.3.1
 - Mark selected classes that cause conflicts or duplicate-section warnings directly in the KMITL teaching table
 
