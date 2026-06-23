@@ -1780,6 +1780,48 @@ html.ksb-dark-mode .v-icon.mdi-shield-check.gradient-text1 {
     -webkit-text-fill-color: transparent !important;
 }
 
+/* 12. Registration Page Dark Mode Fixes */
+
+/* Table Rows (lighten-4 overrides) */
+html.ksb-dark-mode tr.light-green.lighten-4 {
+    background-color: rgba(76, 175, 80, 0.15) !important; /* semi-transparent dark green */
+    color: var(--ksb-text) !important;
+}
+
+html.ksb-dark-mode tr.light-blue.lighten-4 {
+    background-color: rgba(33, 150, 243, 0.15) !important; /* semi-transparent dark blue */
+    color: var(--ksb-text) !important;
+}
+
+/* Table Headers (light-green and light-blue headers) */
+html.ksb-dark-mode tr.light-green.white--text {
+    background-color: #1b5e20 !important; /* rich dark green background */
+    color: #ffffff !important;
+}
+
+html.ksb-dark-mode tr.light-blue {
+    background-color: #0d47a1 !important; /* rich dark blue background */
+    color: #ffffff !important;
+}
+
+/* Text contrast overrides for Vuetify utility text colors */
+html.ksb-dark-mode .light-green--text.text--darken-4 {
+    color: #a5d6a7 !important; /* light green for high contrast on dark bg */
+}
+
+html.ksb-dark-mode .light-blue--text.text--darken-4 {
+    color: #90caf9 !important; /* light blue for high contrast on dark bg */
+}
+
+html.ksb-dark-mode .orange--text.text--darken-4 {
+    color: #ffb74d !important; /* light orange for footer text readability */
+}
+
+html.ksb-dark-mode .red--text {
+    color: #ef9a9a !important; /* light red/salmon for warnings/errors */
+}
+
+
 
 
 
